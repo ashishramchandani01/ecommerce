@@ -5,7 +5,7 @@ const HeroBanner = () => {
   return (
     <div className="hero-banner relative">
             <div className="image-main">
-                <img src={Banner} alt="hero-banner" className="max-w-full" />
+                <img src={Banner} alt="hero-banner" className="max-w-full" loading="lazy" />
             </div>
             <div className='container mx-auto'>
                 <div className="mx-auto absolute top-1/2">

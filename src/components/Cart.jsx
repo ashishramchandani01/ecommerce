@@ -8,20 +8,17 @@ const Cart = ({ cartItems, setCartItems, subtotal}) => {
     const updatedCart = [...cartItems];
     updatedCart.splice(index, 1);
     setCartItems(updatedCart);
-    localStorage.setItem('lastAddedProduct', JSON.stringify(updatedCart));
   };
 
   const clearCart = () => {
     // Clear all items from the cart
     setCartItems([]);
-    localStorage.removeItem('lastAddedProduct');
   };
 
   useEffect(() => {
     // Retrieve cart items from local storage when the component mounts
-    const storedItems = JSON.parse(localStorage.getItem('lastAddedProduct')) || [];
-    setCartItems(storedItems);
-  }, [setCartItems]); 
+    setCartItems(cartItems);
+  }); 
 
   return (
     <div className="cart-container w-full inline-block">

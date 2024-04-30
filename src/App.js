@@ -15,19 +15,15 @@ const App = () => {
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0); // Initialize subtotal with 0
 
+const setToLocal = (items) => {
+  localStorage.setItem("item", JSON.stringify(items))
+  setCartItems(items)
+}
+
 useEffect(() => {
-  // Retrieve cart items from local storage
-  const storedItems = JSON.parse(localStorage.getItem('lastAddedProduct')) || [];
-  setCartItems(storedItems);
-
-  // Calculate subtotal
-  const subTotal = storedItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+  const subTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
   setSubtotal(subTotal); // Update the subtotal state
-}, []);
-
-  
-
-  
+}, [cartItems]);
 
   const getCartItemCount = () => {
     return cartItems.length;
@@ -39,8 +35,8 @@ useEffect(() => {
         <Routes>
           <Route path="/" element={<Layout cartItemCount={getCartItemCount()} />}>
             <Route index element={<HomePage />} />
-            <Route path="/men" element={<Men  />}/>
-            <Route path="/women" element={<Women />}/>
+            <Route path="/men" element={<Men cartItems={cartItems} setCartItems={setToLocal} />}/>
+            <Route path="/women" element={<Women cartItems={cartItems} setCartItems={setToLocal} />}/>
             <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} subtotal={subtotal} />}/>
             <Route path="/checkout" element={<Checkout subtotal={subtotal} />} />
             <Route path="/order" element={<Order/>} />

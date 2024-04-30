@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Women = () => {
+const Women = ({setCartItems, cartItems}) => {
   const [menProducts, setMenProducts] = useState([]);
 
   useEffect(() => {
@@ -18,12 +18,11 @@ const Women = () => {
   }, []);
 
   const handleAddToCart =  async(product) => {
-    const existingProducts = JSON.parse(localStorage.getItem('lastAddedProduct')) || [];
-    const existingProductIndex = existingProducts.findIndex(item => item.id === product.id);
+    const existingProductIndex = cartItems.findIndex(item => item.id === product.id);
 
     if (existingProductIndex !== -1) {
       // Product already exists in cart, update its quantity
-      existingProducts[existingProductIndex].quantity += 1;
+      cartItems[existingProductIndex].quantity += 1;
     } else {
       // Product doesn't exist in cart, add it with quantity 1
       const productData = {
@@ -33,28 +32,29 @@ const Women = () => {
         image: `https://via.placeholder.com/150?text=${product.title}`,
         quantity: 1 // Initial quantity
       };
-      existingProducts.push(productData);
+      cartItems.push(productData);
     }
 
-    localStorage.setItem('lastAddedProduct', JSON.stringify(existingProducts));
   // Update loading state to show "Adding to Cart..."
-  setMenProducts(prevProducts => prevProducts.map(prevProduct => {
+  const cartitem =  setCartItems(prevProducts => prevProducts.map(prevProduct => {
     if (prevProduct.id === product.id) {
       return { ...prevProduct, loading: true };
     }
     return prevProduct;
   }));
+  setCartItems(cartitem)
 
   // Simulate delay to show "Adding to Cart..." text for a brief moment
   await new Promise(resolve => setTimeout(resolve, 1000));
 
   // Set loading state back to false after addition is completed
-  setMenProducts(prevProducts => prevProducts.map(prevProduct => {
+  const cartafitem = setCartItems(prevProducts => prevProducts.map(prevProduct => {
     if (prevProduct.id === product.id) {
       return { ...prevProduct, loading: false };
     }
     return prevProduct;
   }));
+  setCartItems(cartafitem)
 };
 
 return (
