@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "id": "6307",
+      "firstName": "ashish",
+      "lastName": "ramchandani",
+      "email": "ashishramchandani04@gmail.com",
+      "password": "ashish@123",
+      "confirmPassword": "ashish@123"
+    },
+    {
+      "id": "b54b",
+      "firstName": "ashish",
+      "lastName": "ramchandani",
+      "email": "ashishramchandani04@gmail.com",
+      "password": "ashish@123",
+      "confirmPassword": "ashish@123"
+    },
+    {
+      "id": "6b17",
+      "firstName": "ashish",
+      "lastName": "ramchandani",
+      "email": "ashish.ramchandani@rysun.com",
+      "mobile": "9624544287",
+      "password": "ashish@123",
+      "confirmPassword": "ashish@123"
+    }
+  ]
+}
